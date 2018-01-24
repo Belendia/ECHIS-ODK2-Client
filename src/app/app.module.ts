@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HamletsComponent } from './village-profile/hamlets/hamlets.component';
@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
+    MatButtonModule,
     AppRoutingModule
   ],
   providers: [],
