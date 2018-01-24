@@ -4,11 +4,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
+import { HamletsComponent } from './village-profile/hamlets/hamlets.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HamletsComponent
   ],
   imports: [
     BrowserModule,
