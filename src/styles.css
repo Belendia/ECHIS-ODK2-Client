@@ -25,3 +25,8 @@
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
   }
+
+mat-card {
+    padding: 14px;
+    margin-top: 10px;
+}
