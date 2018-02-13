@@ -1,29 +1,30 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatButtonModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { AppComponent } from './app.component';
-import { HamletsComponent } from './village-profile/hamlets/hamlets.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { VillageProfileModule } from './village-profile/village-profile.module';
+import { AppComponent } from './app.component';
+import { ODKService } from './shared/odk.service';
+import { PagerService } from './shared/pager.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HamletsComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    VillageProfileModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ ODKService, PagerService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
