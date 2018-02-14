@@ -88,12 +88,10 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
 
   onAdd() {
     //ToDo: read kebele id from the database
-    this.preserveState();
     this.odkService.addRowWithSurvey('hamlet', 'hamlet',{kebele_id:'1'});
   }
 
   onEdit(hamlet: Hamlet) {
-    this.preserveState();
     this.odkService.editRowWithSurvey('hamlet', 'hamlet',hamlet.id);
   }
 
@@ -105,6 +103,7 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
     this.pageSize = pageEvent.pageSize;
     this.display_hamlets = this.pagerService.getPage(
       pageEvent.length, pageEvent.pageIndex, pageEvent.pageSize, this.hamlets);
+    this.preserveState();
   }
 
   onDelete(hamlet: Hamlet): void {

@@ -117,17 +117,16 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
 
   onAdd() {
     //ToDo: read hamlet id from the database
-    this.preserveState();
     this.odkService.addRowWithSurvey('household', 'household',{hamlet_id:this.selectedHamletId});
   }
 
   onEdit(houashold: Household) {
-    this.preserveState();
     this.odkService.editRowWithSurvey('household', 'household',houashold.id);
   }
 
   onSelectChange(event: MatSelectChange) {
     this.selectedHamletId = event.value;
+    this.preserveState();
     this.householdsService.getHouseholds(event.value);
   }
 
@@ -135,6 +134,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
     this.pageSize = pageEvent.pageSize;
     this.display_households = this.pagerService.getPage(
       pageEvent.length, pageEvent.pageIndex, pageEvent.pageSize, this.households);
+    this.preserveState();
   }
 
   onDelete(household: Household): void {
@@ -170,7 +170,11 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   }
 
   preserveState() {
-    this.odkService.setSessionVariable(this.LOG_TAG, {pageSize:this.pageSize, selectedHamletId:this.selectedHamletId});
+    this.odkService.setSessionVariable(this.LOG_TAG, 
+      {
+        pageSize:this.pageSize, 
+        selectedHamletId:this.selectedHamletId
+      });
   }
 
   recoverState() {
