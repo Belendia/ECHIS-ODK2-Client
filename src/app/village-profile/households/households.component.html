@@ -1,10 +1,14 @@
 <br />
 <h4>Households</h4>
-<mat-select placeholder="Hamlet" [(ngModel)]="selectedHamletId" name="hamlet" (selectionChange) = "onSelectChange($event)">
-  <mat-option *ngFor="let hamlet of hamlets" [value]="hamlet.id">
-    {{hamlet.name}}
-  </mat-option>
-</mat-select>
+<mat-card>
+  <mat-select placeholder="Hamlet" [(ngModel)]="selectedHamletId" 
+      name="hamlet" (selectionChange) = "onSelectChange($event)">
+    <mat-option *ngFor="let hamlet of hamlets" [value]="hamlet.id">
+      {{hamlet.name}}
+    </mat-option>
+  </mat-select>
+</mat-card>
+
 <mat-list *ngIf="!loading && display_households.length > 0">
   <mat-list-item *ngFor="let household of display_households">
     <div class="wrapper">
