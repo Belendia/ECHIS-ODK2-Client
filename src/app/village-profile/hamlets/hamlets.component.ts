@@ -84,6 +84,7 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
   ngOnDestroy() {
     this.hamletsSubscription.unsubscribe();
     this.odkSubscription.unsubscribe();
+    this.destroyState();
   }
 
   onAdd() {
@@ -144,9 +145,14 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
 
   recoverState() {
     let state = this.odkService.getSessionVariable(this.LOG_TAG);
-    if(state !== null && state !== undefined) {
+
+    if(state !== undefined && state !== null && state !== "null") {
         let stateObject = JSON.parse(state);
         this.pageSize = stateObject.pageSize;
     }
+  }
+
+  destroyState() {
+    this.odkService.setSessionVariable(this.LOG_TAG, null);
   }
 }
