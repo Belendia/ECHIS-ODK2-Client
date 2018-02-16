@@ -37,7 +37,6 @@ export class HouseholdsService {
               this.households = [];
               
               for (let row = 0; row < result.getCount(); row++) {
-                console.log(result.getData(row,"photo"));
                 this.households.push( new Household(result.getData(row,"_id"),
                   result.getData(row, "hamlet_id"),
                   result.getData(row,"registration_date"),
