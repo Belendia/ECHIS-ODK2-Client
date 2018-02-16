@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule, MatListModule, MatButtonModule, MatMenuModule, 
          MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatGridListModule, 
-         MatSnackBarModule, MatSelectModule, MatOptionModule } from '@angular/material';
+         MatSnackBarModule, MatSelectModule, MatOptionModule, MatInputModule } from '@angular/material';
 import { FormsModule } from "@angular/forms";
 
 import { SharedModule } from "../shared/shared.module";
@@ -12,11 +12,14 @@ import { ConfirmDialogComponent } from "../shared/confirm-dialog/confirm-dialog.
 import { HouseholdsComponent } from "./households/households.component";
 import { HamletsService } from "./hamlets/hamlets.service";
 import { HouseholdsService } from "./households/households.service";
+import { HouseholdsToolbarComponent } from "./households/households-toolbar/households-toolbar.component";
+import { VillageProfileRoutingModule } from "./village-profile-routing.module";
 
 @NgModule({
     declarations:[
         HamletsComponent,
-        HouseholdsComponent
+        HouseholdsComponent,
+        HouseholdsToolbarComponent
     ],
     imports: [
         CommonModule,
@@ -32,8 +35,10 @@ import { HouseholdsService } from "./households/households.service";
         MatSnackBarModule,
         MatSelectModule,
         MatOptionModule,
+        MatInputModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        VillageProfileRoutingModule
     ],
     exports: [
         HamletsComponent,
@@ -41,6 +46,6 @@ import { HouseholdsService } from "./households/households.service";
         MatListModule,
     ],
     providers: [ HamletsService, HouseholdsService ],
-    entryComponents: [ ConfirmDialogComponent ]
+    entryComponents: [ ConfirmDialogComponent, HouseholdsToolbarComponent ]
 })
 export class VillageProfileModule{}
