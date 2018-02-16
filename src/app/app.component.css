@@ -1,3 +1,7 @@
 .main-content {
     padding: 0px 20px;
-  }
+}
+
+.toolbar-container {
+    flex: 1 1 auto;
+}

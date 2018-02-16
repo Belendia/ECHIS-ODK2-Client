@@ -8,10 +8,14 @@ import { VillageProfileModule } from './village-profile/village-profile.module';
 import { AppComponent } from './app.component';
 import { ODKService } from './shared/odk.service';
 import { PagerService } from './shared/pager.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,7 @@ import { PagerService } from './shared/pager.service';
     VillageProfileModule
   ],
   providers: [ ODKService, PagerService ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  entryComponents: [ToolbarComponent]
 })
 export class AppModule { }

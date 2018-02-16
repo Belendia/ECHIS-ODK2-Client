@@ -4,11 +4,13 @@ import { MatDialogModule } from "@angular/material";
 
 import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
     declarations:[
         ConfirmDialogComponent,
-        MessageDialogComponent
+        MessageDialogComponent,
+        ToolbarComponent
     ],
     imports: [
         CommonModule,
@@ -17,7 +19,8 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     exports: [
         CommonModule,
         ConfirmDialogComponent,
-        MessageDialogComponent
+        MessageDialogComponent,
+        ToolbarComponent
     ]
 })
 export class SharedModule{}

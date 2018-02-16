@@ -1,0 +1,15 @@
+<div class="container">
+  <span *ngIf="!showSearch">{{ title }}</span>
+  <span class="spacer" *ngIf="!showSearch"></span>
+  <span>
+    <button mat-icon-button *ngIf="!showSearch" (click)="toggleSearch()" class="spacer">
+      <mat-icon>search</mat-icon>
+    </button>
+  </span>
+  <span *ngIf="showSearch" class="container-right">
+    <input type="text" placeholder="Search" [(ngModel)]="searchTerm" (input)="onSearchChange($event.target.value)" />
+    <button mat-icon-button (click)="toggleSearch()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</div>

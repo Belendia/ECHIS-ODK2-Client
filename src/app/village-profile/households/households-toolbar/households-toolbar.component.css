@@ -1,0 +1,28 @@
+.spacer {
+    flex: 1 1 auto;
+}
+.container {
+    flex: 1 1 auto;
+    display:flex;
+    width: 100%;
+}
+.container-right {
+    flex: 1 1 auto;
+    display:block;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+input {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid white;
+    outline: none;
+    color: rgba(255,255,255,0.87);
+    font-size: 16px;
+    width: 85%;
+    box-sizing: border-box;
+    padding: 10px;
+    top: 0;
+    right:0;
+}
