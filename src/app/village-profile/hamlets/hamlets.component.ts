@@ -82,8 +82,8 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
   ngDoCheck(): void {}
 
   ngOnDestroy() {
-    this.hamletsSubscription.unsubscribe();
-    this.odkSubscription.unsubscribe();
+    if(this.hamletsSubscription) this.hamletsSubscription.unsubscribe();
+    if(this.odkSubscription) this.odkSubscription.unsubscribe();
     this.destroyState();
   }
 

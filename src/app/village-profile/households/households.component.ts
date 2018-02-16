@@ -84,11 +84,9 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
 
       this.hamletsSubscription = this.hamletsService.hamletObservable
         .subscribe((result:{status:Status, hamlets: Hamlet[]})=> {
-          console.log(result);
           if(result.hamlets !== undefined && result.hamlets !== null) {
             switch(result.status) {
               case Status.LoadSuccess:
-                console.log("Success");
                 this.hamlets = result.hamlets;
                 break;
             }
@@ -110,9 +108,9 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   ngDoCheck(): void {}
 
   ngOnDestroy() {
-    this.householdsSubscription.unsubscribe();
-    this.hamletsSubscription.unsubscribe();
-    this.odkSubscription.unsubscribe();
+    if(this.householdsSubscription) this.householdsSubscription.unsubscribe();
+    if(this.hamletsSubscription) this.hamletsSubscription.unsubscribe();
+    if(this.odkSubscription) this.odkSubscription.unsubscribe();
     this.destroyState();
   }
 
