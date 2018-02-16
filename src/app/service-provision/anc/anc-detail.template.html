@@ -10,17 +10,30 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="First name">
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput type="number" min="1" placeholder="Age">
-    </mat-form-field>
+    <mat-nav-list >
+      <h3 mat-subheader>Completed Visits</h3>
+      <mat-list-item *ngFor="let ancVisit of visits">
+        <mat-icon mat-list-icon>folder</mat-icon>
+        <h4 mat-line>{{ancVisit.name}}</h4>
+        <p mat-line> On {{ancVisit.date}} </p>
+        <button mat-icon-button (click)="showInfo(ancVisit)">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button mat-icon-button (click)="edit(ancVisit)">
+          <mat-icon>info</mat-icon>
+        </button>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 mat-subheader>Upcoming Visits</h3>
+      <mat-list-item *ngFor="let ancAlert of alerts">
+        <mat-icon mat-list-icon>note</mat-icon>
+        <h4 mat-line>{{ancAlert.name}}</h4>
+        <p mat-line> {{ancAlert.date }} </p>
+      </mat-list-item>
+    </mat-nav-list>
 
     <mat-action-row>
-      <button mat-button color="primary" (click)="nextStep()">Next</button>
-      <button mat-button color="primary" (click)="newVisit()">ANC Visit</button>
+      <button mat-button color="primary" (click)="newVisit()">New ANC Visit</button>
     </mat-action-row>
   </mat-expansion-panel>
 
@@ -35,9 +48,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="Country">
-    </mat-form-field>
+
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>
@@ -56,10 +67,7 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <mat-form-field>
-      <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-    </mat-form-field>
-    <mat-datepicker #picker></mat-datepicker>
+
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>

@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-
+import { ODKService } from '../../shared/odk.service';
 @Component({
   selector: 'anc-list',
-  templateUrl: './anc-list.template.html'
+  templateUrl: './anc-list.template.html',
+  styleUrls: ['./anc-list.style.css']
 })
 export class AncListComponent implements OnInit{
 
-  constructor(private router: Router, private route: ActivatedRoute)  {}
+  constructor(private router: Router, private route: ActivatedRoute,  private odkService: ODKService)  {}
   ancClients:any =[];
   ngOnInit(): void {
     this.ancClients = [
@@ -105,5 +106,10 @@ export class AncListComponent implements OnInit{
   goToDetail(ancClient:any)
   {
     this.router.navigate(['../anc-detail'], {relativeTo: this.route});
+  }
+
+  onAdd()
+  {
+    //this.odkService.addRowWithSurvey('mother', 'registration',{kebele_id:'1'});
   }
 }

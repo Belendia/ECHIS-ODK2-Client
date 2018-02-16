@@ -8,6 +8,7 @@ import { VillageProfileModule } from './village-profile/village-profile.module';
 import { AppComponent } from './app.component';
 import { ODKService } from './shared/odk.service';
 import { PagerService } from './shared/pager.service';
+import {ServiceProvisionModule} from './service-provision/service-provision.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PagerService } from './shared/pager.service';
     MatSidenavModule,
     MatButtonModule,
     AppRoutingModule,
-    VillageProfileModule
+    VillageProfileModule,
+    ServiceProvisionModule
   ],
   providers: [ ODKService, PagerService ],
   bootstrap: [ AppComponent ]

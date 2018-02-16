@@ -25,7 +25,7 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
   length = 0;
   pageSize = 10;
   pageSizeOptions = [5, 10, 25];
-  
+
   hamletsSubscription: Subscription;
   odkSubscription: Subscription;
 
@@ -38,7 +38,7 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
               private pagerService: PagerService,
               public dialog: MatDialog,
               public snackBar: MatSnackBar,
-              private router: Router) {} 
+              private router: Router) {}
 
   ngOnInit() {
     //recover data from session variables
@@ -82,8 +82,10 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
   ngDoCheck(): void {}
 
   ngOnDestroy() {
-    this.hamletsSubscription.unsubscribe();
-    this.odkSubscription.unsubscribe();
+    if(this.hamletsSubscription)
+       this.hamletsSubscription.unsubscribe();
+    if(this.odkSubscription)
+       this.odkSubscription.unsubscribe();
     this.destroyState();
   }
 
@@ -110,10 +112,10 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
   onDelete(hamlet: Hamlet): void {
     if(hamlet.number_of_households === 0) {
       let dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        data: { title:'Confirm Delete' , 
+        data: { title:'Confirm Delete' ,
         message: 'Are you sure you want to delete ' + hamlet.name + ' ?' }
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         if(result) {// if 'Yes' button is clicked, result param will be true
           this.hamletsService.delete(hamlet);
@@ -122,7 +124,7 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
     } else {
       this.openSnackBar('You are not allowed to delete hamlets which have households.','Dismiss');
     }
-    
+
   }
 
   refreshView(hamlets: Hamlet[]) {
