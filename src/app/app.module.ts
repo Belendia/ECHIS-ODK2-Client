@@ -8,6 +8,7 @@ import { VillageProfileModule } from './village-profile/village-profile.module';
 import { AppComponent } from './app.component';
 import { ODKService } from './shared/odk.service';
 import { PagerService } from './shared/pager.service';
+import {ServiceProvisionModule} from './service-provision/service-provision.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
@@ -25,7 +26,8 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
     MatSidenavModule,
     MatButtonModule,
     AppRoutingModule,
-    VillageProfileModule
+    VillageProfileModule,
+    ServiceProvisionModule
   ],
   providers: [ ODKService, PagerService ],
   bootstrap: [ AppComponent ],

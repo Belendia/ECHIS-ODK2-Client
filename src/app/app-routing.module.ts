@@ -1,15 +1,19 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from "./dashboard/dashboard.component";
+import {AncListComponent} from './service-provision/anc/anc-list.component';
+import {AncDetailComponent} from './service-provision/anc/anc-detail.component';
 
 
 const appRoutes: Routes = [
     { path:'', redirectTo:'/dashboard', pathMatch:'full' },
-    //phone
+  //phone
     {path:'default/config/assets',redirectTo:'/dashboard', pathMatch:'full'},
     {path:'default/config/assets/index.html',redirectTo:'/dashboard', pathMatch:'full'},
-    {path: 'dashboard', component: DashboardComponent}
-];
+    {path: 'dashboard', component: DashboardComponent},
+  { path: 'anc', component: AncListComponent},
+  { path: 'anc-detail', component: AncDetailComponent}
+    ];
 
 @NgModule({
     imports: [
