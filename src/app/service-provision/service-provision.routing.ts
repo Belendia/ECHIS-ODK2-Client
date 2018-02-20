@@ -13,7 +13,7 @@ const routes: Routes = [
     component: AncListComponent
   },
   {
-    path: 'anc-detail',
+    path: 'anc-detail/:mother_case_id',
     component: AncDetailComponent
   }
 

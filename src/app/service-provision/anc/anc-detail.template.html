@@ -2,17 +2,30 @@
   <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        ANC Visit History
+        ANC Visit Status
       </mat-panel-title>
       <mat-panel-description>
-        Type your name and age
+
         <mat-icon>account_circle</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
 
     <mat-nav-list >
-      <h3 mat-subheader>Completed Visits</h3>
-      <mat-list-item *ngFor="let ancVisit of visits">
+      <h3 mat-subheader>Completed ANC  Visits</h3>
+
+      <mat-chip-list>
+        <div *ngFor="let visit of ancVisits">
+            <span class="label label-primary label-sm" *ngIf="visit.name==='ANC 2'">
+                <i class="fa fa-check"></i>{{ visit.date}}
+            </span>
+        </div>
+        <mat-chip>One fish</mat-chip>
+        <mat-chip>Two fish</mat-chip>
+        <mat-chip color="primary" selected="true">Primary fish</mat-chip>
+        <mat-chip color="accent" selected="true">Accent fish</mat-chip>
+      </mat-chip-list>
+
+      <!--  <mat-list-item *ngFor="let ancVisit of visits">
         <mat-icon mat-list-icon>folder</mat-icon>
         <h4 mat-line>{{ancVisit.name}}</h4>
         <p mat-line> On {{ancVisit.date}} </p>
@@ -24,12 +37,12 @@
         </button>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 mat-subheader>Upcoming Visits</h3>
+      <h3 mat-subheader>Next ANC Visit</h3>
       <mat-list-item *ngFor="let ancAlert of alerts">
         <mat-icon mat-list-icon>note</mat-icon>
         <h4 mat-line>{{ancAlert.name}}</h4>
         <p mat-line> {{ancAlert.date }} </p>
-      </mat-list-item>
+      </mat-list-item>-->
     </mat-nav-list>
 
     <mat-action-row>
@@ -40,15 +53,19 @@
   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Destination
+        Delivery Plan
       </mat-panel-title>
       <mat-panel-description>
-        Type the country name
+
         <mat-icon>map</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
-
-
+    <div *ngIf="deliveryPlan === undefined || deliveryPlan === null">
+          No delivery plan found for the client!
+    </div>
+    <div *ngIf="deliveryPlan && deliveryPlan != null">
+      No delivery plan found for the client!
+    </div>
 
     <mat-action-row>
       <button mat-button color="warn" (click)="prevStep()">Previous</button>

@@ -1,17 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { ODKService } from '../../shared/odk.service';
+import {Subscription} from 'rxjs/Subscription';
+import {AncService} from './service/anc.service';
 @Component({
   selector: 'anc-list',
   templateUrl: './anc-list.template.html',
   styleUrls: ['./anc-list.style.css']
 })
-export class AncListComponent implements OnInit{
+export class AncListComponent implements OnInit, OnDestroy{
 
-  constructor(private router: Router, private route: ActivatedRoute,  private odkService: ODKService)  {}
+  constructor(private ancService: AncService, private router: Router, private route: ActivatedRoute,  private odkService: ODKService)  {}
   ancClients:any =[];
+  ancClientsSubscription: Subscription;
   ngOnInit(): void {
-    this.ancClients = [
+    /*this.ancClients = [
       {
         fname: "Ayelech",
         lname:"Abebe",
@@ -100,16 +103,35 @@ export class AncListComponent implements OnInit{
 
 
 
-    ];
+    ];*/
+
+    this.ancClientsSubscription = this.ancService.getAncClients().subscribe(
+      (result) => {
+        this.ancClients = result;
+        console.log(JSON.stringify(result));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
   }
 
   goToDetail(ancClient:any)
   {
-    this.router.navigate(['../anc-detail'], {relativeTo: this.route});
+    this.router.navigate(['../anc-detail', ancClient.householdMemberId], {relativeTo: this.route});
   }
 
   onAdd()
   {
-    //this.odkService.addRowWithSurvey('mother', 'registration',{kebele_id:'1'});
+    this.odkService.addRowWithSurvey('mother', 'mother', null);
   }
+
+
+  ngOnDestroy(): void {
+    if(this.ancClientsSubscription)
+      this.ancClientsSubscription.unsubscribe();
+  }
+
+
 }

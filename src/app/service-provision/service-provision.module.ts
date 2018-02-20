@@ -9,6 +9,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
+import {AncService} from './anc/service/anc.service';
 @NgModule({
   declarations:[
     AncListComponent, AncDetailComponent
@@ -21,12 +23,13 @@ import {MatButtonModule} from '@angular/material/button';
     MatExpansionModule,
     MatIconModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    MatChipsModule
   ],
   exports: [
     AncListComponent, AncDetailComponent
   ],
-/*  providers: [ HamletsService, HouseholdsService ],*/
+ providers: [ AncService ],
  /* entryComponents: [ ConfirmDialogComponent ]*/
 })
 export class ServiceProvisionModule {}

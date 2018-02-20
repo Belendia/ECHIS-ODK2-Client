@@ -4,13 +4,13 @@
       <mat-icon mat-list-icon>person_outline</mat-icon>
   <!-- <img matListAvatar src="../../../assets/images/pregnant-icon.png" height="53"
                                                         alt="member picture" width="51"/>-->
-    <h3 matLine> {{client.fname + " "+ client.lname + " "+ client.gname}} </h3>
+    <h3 matLine> {{client.name}} </h3>
     <p matLine>
          <span> {{client.orgUnit}} </span>
     </p>
     <p matLine>
-         <span> LMP: {{client.LMP}}</span>
-         <span> EDD: {{ client.EDD}}</span>
+         <span> LMP: {{client.lmp}}</span>
+         <span> EDD: {{ client.edd}}</span>
     </p>
 
     <mat-divider></mat-divider>
