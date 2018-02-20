@@ -1,0 +1,22 @@
+<mat-nav-list>
+  <h3 mat-subheader>ANC Clients</h3>
+  <mat-list-item  *ngFor="let client of ancClients" (click)="goToDetail(client)" >
+      <mat-icon mat-list-icon>person_outline</mat-icon>
+  <!-- <img matListAvatar src="../../../assets/images/pregnant-icon.png" height="53"
+                                                        alt="member picture" width="51"/>-->
+    <h3 matLine> {{client.name}} </h3>
+    <p matLine>
+         <span> {{client.orgUnit}} </span>
+    </p>
+    <p matLine>
+         <span> LMP: {{client.lmp}}</span>
+         <span> EDD: {{ client.edd}}</span>
+    </p>
+
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-nav-list>
+
+<button mat-fab (click)="onAdd()" color="primary" class="add-button">
+  <mat-icon>add</mat-icon>
+</button>
