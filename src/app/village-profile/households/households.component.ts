@@ -1,4 +1,4 @@
-import { Component, OnInit,DoCheck, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,DoCheck, OnDestroy } from '@angular/core';
 import { MatMenuTrigger, PageEvent, MatDialog, MatSnackBar, MatSelectChange} from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -25,6 +25,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   message = "";
   selectedHamletId:string;
   hamlets: Hamlet[] = [];
+  searchTerm: String = '';
 
   // MatPaginator Inputs
   length = 0;
@@ -32,6 +33,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   pageSizeOptions = [5, 10, 25, 100];
   
   householdsSubscription: Subscription;
+  searchTermSubscription: Subscription;
   hamletsSubscription: Subscription;
   odkSubscription: Subscription;
 
@@ -41,7 +43,6 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   constructor(private householdsService: HouseholdsService,
               private hamletsService: HamletsService,
               private odkService: ODKService,
-              private changeDetector: ChangeDetectorRef,
               private pagerService: PagerService,
               public dialog: MatDialog,
               public snackBar: MatSnackBar,
@@ -93,6 +94,10 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
           }
         });
 
+        this.searchTermSubscription = this.householdsService.searchTermObservable
+          .subscribe((searchTerm) => {
+            this.searchTerm = searchTerm;
+         });
     //get hamlets list from the database
     this.hamletsService.getHamlets();
 
@@ -103,6 +108,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
       result => this.householdsService.getHouseholds(this.selectedHamletId));
 
     this.odkService.setSurveyIdentifierCode(this.SURVEY_IDENTIFIER_CODE);
+    
   }
 
   ngDoCheck(): void {}
@@ -111,6 +117,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
     if(this.householdsSubscription) this.householdsSubscription.unsubscribe();
     if(this.hamletsSubscription) this.hamletsSubscription.unsubscribe();
     if(this.odkSubscription) this.odkSubscription.unsubscribe();
+    if(this.searchTermSubscription) this.searchTermSubscription.unsubscribe();
     this.destroyState();
   }
 

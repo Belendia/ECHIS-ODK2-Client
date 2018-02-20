@@ -5,12 +5,14 @@ import { MatDialogModule } from "@angular/material";
 import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FilterPipe } from "./pipe/filter.pipe";
 
 @NgModule({
     declarations:[
         ConfirmDialogComponent,
         MessageDialogComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        FilterPipe
     ],
     imports: [
         CommonModule,
@@ -20,7 +22,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
         CommonModule,
         ConfirmDialogComponent,
         MessageDialogComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        FilterPipe
     ]
 })
 export class SharedModule{}

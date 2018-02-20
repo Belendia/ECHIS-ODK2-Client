@@ -1,5 +1,3 @@
-<br />
-<h4>Households</h4>
 <mat-card>
   <mat-select placeholder="Hamlet" [(ngModel)]="selectedHamletId" 
       name="hamlet" (selectionChange) = "onSelectChange($event)">
@@ -10,7 +8,7 @@
 </mat-card>
 
 <mat-list *ngIf="!loading && display_households.length > 0">
-  <mat-list-item *ngFor="let household of display_households">
+  <mat-list-item *ngFor="let household of display_households | filter:searchTerm:'household_number'">
     <div class="wrapper">
       <div>
           <img class="avatar" src="{{household.photo}}" alt="{{household.house_number}}">

@@ -17,6 +17,7 @@ export class HouseholdsService {
   private LOG_TAG ='HouseholdsService';
   
   householdsObservable = new Subject<{status: Status, households:Household[]}>();
+  searchTermObservable = new Subject<String>();
   
   constructor(private ngZone: NgZone) { }
 
