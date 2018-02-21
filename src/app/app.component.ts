@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
               let componentFactory = this.componentFactoryResolver.resolveComponentFactory(toolbarComponent);
               this.toolbarContainer.clear();
               let componentRef = this.toolbarContainer.createComponent(componentFactory);
+               
+              if(data['title'] !== undefined) {
+                componentRef.instance.title = data['title'];
+              } 
           }
       }
     );
