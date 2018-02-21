@@ -9,7 +9,7 @@ import { HouseholdsToolbarComponent } from "./households/households-toolbar/hous
 const villageProfileRoutes : Routes = [
     { path: 'hamlets', component: HamletsComponent },
     { path: 'households', component: HouseholdsComponent, data:{toolbar: HouseholdsToolbarComponent} },
-    { path: 'households/:hamlet_id', component: HouseholdsComponent }
+    { path: 'households/:hamlet_id', component: HouseholdsComponent, data:{toolbar: HouseholdsToolbarComponent} }
 ];
 
 @NgModule({
