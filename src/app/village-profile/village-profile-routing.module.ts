@@ -11,7 +11,7 @@ const villageProfileRoutes : Routes = [
     { path: 'hamlets', component: HamletsComponent , data:{title: 'Hamlets'}},
     { path: 'households', component: HouseholdsComponent, data:{toolbar: HouseholdsToolbarComponent} },
     { path: 'households/:hamlet_id', component: HouseholdsComponent, data:{toolbar: HouseholdsToolbarComponent} },
-    { path: 'household/:household_id', component: HouseholdComponent, data:{fullScreen: true} }
+    { path: 'household/:household_id', component: HouseholdComponent, data:{fullScreen: true, title: 'Household'} }
 ];
 
 @NgModule({
