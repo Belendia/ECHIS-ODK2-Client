@@ -1,6 +1,6 @@
 import { Component, OnInit,DoCheck, OnDestroy } from '@angular/core';
 import { MatMenuTrigger, PageEvent, MatDialog, MatSnackBar, MatSelectChange} from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Household } from './household.model';
@@ -26,6 +26,7 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
   selectedHamletId:string;
   hamlets: Hamlet[] = [];
   searchTerm: String = '';
+  photo: string = "./assets/images/house.svg"
 
   // MatPaginator Inputs
   length = 0;
@@ -46,7 +47,8 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
               private pagerService: PagerService,
               public dialog: MatDialog,
               public snackBar: MatSnackBar,
-              private route: ActivatedRoute) {} 
+              private route: ActivatedRoute,
+              private router: Router) {} 
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -60,7 +62,6 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
 
     this.householdsSubscription = this.householdsService.householdsObservable
       .subscribe((result:{status:Status, households: Household[]}) => {
-        this.loading = false;
         if(result.households !== undefined && result.households !== null) {
           switch(result.status) {
             case Status.Loading:
@@ -159,6 +160,10 @@ export class HouseholdsComponent implements OnInit,DoCheck, OnDestroy {
     } else {
       this.openSnackBar('You are not allowed to delete households which have household members.','Dismiss');
     }
+  }
+
+  onHouseholdDetail(household: Household): void {
+    this.router.navigate(['/household',household.id] );
   }
 
   refreshView(households: Household[]) {

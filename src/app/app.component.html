@@ -14,7 +14,7 @@
           <span class="toolbar-container"><ng-template #toolbarContainer></ng-template></span>
           
       </mat-toolbar>
-      <div class="main-content">
+      <div class="{{this.fullScreen? 'main-content-full' : 'main-content' }}">
           <router-outlet></router-outlet>
       </div>
   </mat-sidenav-content>

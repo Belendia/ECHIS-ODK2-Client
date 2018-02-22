@@ -42,11 +42,13 @@ export class HouseholdsService {
                   result.getData(row, "hamlet_id"),
                   result.getData(row,"registration_date"),
                   result.getData(row,"household_number"),
+                  result.getData(row, "head_name"),
                   result.getData(row,"phone"),
                   //odkCommon.getRowFileAsUrl('household',row,result.getData(row,"photo_uriFragment")),
-                  '../../data/tables/household/instances/'+result.getData(row,"_id").replace(/:|-/g,'_')+'/'+result.getData(row,"photo_uriFragment"),
+                  (result.getData(0,"photo_uriFragment") ? '../../data/tables/household/instances/'+result.getData(row,"_id").replace(/:|-/g,'_')+'/'+result.getData(row,"photo_uriFragment") : null),
                   Number(result.getData(row, "current_status")),
-                  Number(result.getData(row,"number_of_hh_member"))));
+                  Number(result.getData(row,"number_of_hh_member")),
+                  null));
               }
 
               this.ngZone.run(() => this.householdsObservable.next({ status:Status.LoadSuccess, households:this.households.slice() }));
@@ -62,7 +64,7 @@ export class HouseholdsService {
     if(index> -1) {
       odkData.deleteRow('household', {'_id':household.id}, household.id, ()=>{
         this.households.splice(index, 1);
-        this.ngZone.run(() => this.householdsObservable.next({ status:Status.DeleteSuccess, households:this.households.slice() }));
+        this.ngZone.run(() => this.householdsObservable.next({ status:Status.DeleteSuccess, households:this.households }));
       }, ()=>{
         this.ngZone.run(() => this.householdsObservable.next({ status: Status.DeleteError, households:this.households }));
       });
