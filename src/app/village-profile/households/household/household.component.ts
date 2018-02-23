@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Status } from '../../../shared/status.enum';
   templateUrl: './household.component.html',
   styleUrls: ['./household.component.css']
 })
-export class HouseholdComponent implements OnInit {
+export class HouseholdComponent implements OnInit, OnDestroy {
   private LOG_TAG: string = "HouseholdComponent";
 
   @ViewChild('tab') tab: ElementRef;
