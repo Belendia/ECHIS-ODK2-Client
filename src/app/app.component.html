@@ -3,7 +3,7 @@
       <mat-nav-list>
         <mat-list-item><a routerLink="/hamlets" (click)="sidenav.close()">Hamlet</a></mat-list-item>
         <mat-list-item><a routerLink="/households" (click)="sidenav.close()">Households</a></mat-list-item>
-        <mat-list-item><a routerLink="/anc" (click)="sidenav.close()">Anc</a></mat-list-item>
+        <mat-list-item><a routerLink="/anc-list" (click)="sidenav.close()">Anc</a></mat-list-item>
       </mat-nav-list>
 
   </mat-sidenav>
@@ -12,7 +12,7 @@
       <mat-toolbar color="primary">
           <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
           <span class="toolbar-container"><ng-template #toolbarContainer></ng-template></span>
-          
+
       </mat-toolbar>
       <div class="main-content">
           <router-outlet></router-outlet>

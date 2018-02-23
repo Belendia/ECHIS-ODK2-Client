@@ -10,9 +10,7 @@ const appRoutes: Routes = [
   //phone
     {path:'default/config/assets',redirectTo:'/dashboard', pathMatch:'full'},
     {path:'default/config/assets/index.html',redirectTo:'/dashboard', pathMatch:'full'},
-    {path: 'dashboard', component: DashboardComponent},
-  { path: 'anc', component: AncListComponent},
-  { path: 'anc-detail', component: AncDetailComponent}
+    {path: 'dashboard', component: DashboardComponent}
     ];
 
 @NgModule({

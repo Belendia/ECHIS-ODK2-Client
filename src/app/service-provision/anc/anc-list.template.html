@@ -1,21 +1,47 @@
-<mat-nav-list>
+<mat-nav-list *ngIf="ancClients !=null && ancClients.length >0">
   <h3 mat-subheader>ANC Clients</h3>
-  <mat-list-item  *ngFor="let client of ancClients" (click)="goToDetail(client)" >
-      <mat-icon mat-list-icon>person_outline</mat-icon>
+  <mat-list-item  *ngFor="let client of ancClients">
+      <mat-icon mat-list-icon aria-setsize="48">person_outline</mat-icon>
   <!-- <img matListAvatar src="../../../assets/images/pregnant-icon.png" height="53"
                                                         alt="member picture" width="51"/>-->
-    <h3 matLine> {{client.name}} </h3>
+    <h2 matLine> {{client.name}} </h2>
     <p matLine>
          <span> {{client.orgUnit}} </span>
     </p>
     <p matLine>
-         <span> LMP: {{client.lmp}}</span>
+         <span> LMP: {{client.lmp | date: 'dd/MM/yyyy'}}</span>
          <span> EDD: {{ client.edd}}</span>
     </p>
+    <p matLine>
+      <span *ngIf="isEddPast(client.edd) !=null && isEddPast(client.edd) === false"> {{getGestationalAge(client)}} weeks pregnant</span>
+    </p>
+    <p matLine>
+      <span *ngIf="client.previousComplications && client.previousComplications !=null" style="color: red"> Previous Complications: {{ client.previousComplications}} </span>
+    </p>
+    <p matLine>
+      <span *ngIf="client.riskFactors && client.riskFactors !=null" style="color: red"> Risk Factors: {{ client.riskFactors }}</span>
+    </p>
+    <p matLine>
+      <span>{{client.isClosed? "Inactive": "Active"}}</span>
+    </p>
 
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="goToDetail(client)">
+        <mat-icon>edit</mat-icon> Detail
+      </button>
+      <button mat-menu-item (click)="closeCase(client)" *ngIf="client.isClosed === false">
+        <mat-icon>delete</mat-icon> Close Anc Case
+      </button>
+      <!--<mat-divider></mat-divider>-->
+
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-nav-list>
+<mat-card *ngIf="ancClients.length === 0">
+  <strong>No ANC clients Recorded so far!! </strong>
+</mat-card>
 
 <button mat-fab (click)="onAdd()" color="primary" class="add-button">
   <mat-icon>add</mat-icon>

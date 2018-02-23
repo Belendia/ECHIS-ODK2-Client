@@ -5,15 +5,18 @@ export class Mother {
   public name:string;
   public age: number;
   public photoPath:string;
-  public registrationDate: Date;
+  public registrationDate: string;
   public registrationLocation: string;
   public registeredBy: string; // care provider id
   // general pregnancy details
-  public lmp: Date;
+  public lmp: string;
   public edd: string;
   public isHighRisk:boolean;
-  public riskFactors:boolean;
+  public riskFactors:string;
+  public isClosed:boolean = false;
 
+  public firstPregnancy: string;
+  public previousComplications: string;
   //anc visits
   public anc1_date: Date;
   public anc2_date: Date;

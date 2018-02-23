@@ -5,6 +5,9 @@ import {Mother} from '../model/mother.model';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 import {AncVisitModel} from '../model/ancVisit.model';
+import {Status} from '../../../shared/status.enum';
+import {Hamlet} from '../../../village-profile/hamlets/hamlet.model';
+import {DeliveryOutcomeModel} from '../model/deliveryOutcome.model';
 
 declare var odkData: any;
 const mockhhmData: any[] = [
@@ -40,6 +43,7 @@ export class AncService {
       null, null, null, null, null, null, null, (result) => {
            let ancClients: Mother[] = [];
              for (let rowId = 0; rowId < result.getCount(); rowId++) {
+               console.log("mother row data :"+ JSON.stringify(result));
                let mother: Mother = new Mother();
                mother.caseId = result.getData(rowId, "_id");
                mother.householdMemberId = result.getData(rowId, "hhmember_id");
@@ -47,6 +51,9 @@ export class AncService {
                mother.registrationLocation = result.getData(rowId, "registration_place");
                mother.lmp = result.getData(rowId, "lmp");
                mother.edd = result.getData(rowId, "edd");
+               mother.previousComplications = result.getData(rowId, "previous_complications");
+               mother.riskFactors = result.getData(rowId, "general_medical_history");
+               console.log("previous_complications "+ result.getData(rowId, "previous_complications"));
                this.fillMotherOtherInfo(mother);
                console.log(this.LOG_TAG + ": mother data: "+ JSON.stringify(mother));
                  ancClients.push(mother);
@@ -74,8 +81,8 @@ export class AncService {
                visit.ancCaseId = result.getData(rowId, "anc_case_id");
                visit.dateOfVisit = result.getData(rowId, "date_of_visit");
                visit.ancVisitNumber = result.getData(rowId, "anc_visit_number");
-               visit.visitPlace = result.getData(rowId, "visit_place");
-               visit.gestationalAge = result.getData(rowId, "gestational_age");
+               visit.visitPlace = result.getData(rowId, "visit_location");
+               visit.gestationalAge = result.getData(rowId, "ga");
                console.log(this.LOG_TAG + ": anc visit data: " + JSON.stringify(visit));
                ancVisits.push(visit);
              }
@@ -90,6 +97,38 @@ export class AncService {
     );
     return ancVisitsSubjects.asObservable();
   }
+
+  getDeliveryOutcome(motherCaseId: string): Observable<DeliveryOutcomeModel>
+  {
+    let deliveryOutcomeSubject: Subject<DeliveryOutcomeModel> = new Subject<DeliveryOutcomeModel>();
+    odkData.query('delivery_outcome', null, null,
+      null, null, null, null, null, null, null, (result) => {
+          let deliveryOutcome: DeliveryOutcomeModel = null;
+        for (let rowId = 0; rowId < result.getCount(); rowId++) {
+          if (result.getData(rowId, "anc_case_id") === motherCaseId) {
+            deliveryOutcome = new DeliveryOutcomeModel();
+            deliveryOutcome.anc_case_id = result.getData(rowId, "anc_case_id");
+            deliveryOutcome.delivery_date = result.getData(rowId, "delivery_date");
+            deliveryOutcome.delivery_place = result.getData(rowId, "delivery_place");
+            deliveryOutcome.type_of_delivery = result.getData(rowId, "type_of_delivery");
+            deliveryOutcome.delivery_outcome = result.getData(rowId, "delivery_outcome");
+            deliveryOutcome.delivery_complications = result.getData(rowId, "delivery_complications");
+            deliveryOutcome.child_sex = result.getData(rowId, "child_sex");
+            deliveryOutcome.child_birth_weight = result.getData(rowId, "child_birth_weight");
+            console.log(this.LOG_TAG + ": delivery outcome: " + JSON.stringify(deliveryOutcome));
+            break;
+          }
+        }
+        deliveryOutcomeSubject.next(deliveryOutcome);
+      },
+      (error) => {
+        console.log(this.LOG_TAG + ":"+ error);
+        deliveryOutcomeSubject.error("Error: Unable to load delivery outcome");
+      }
+    );
+    return deliveryOutcomeSubject.asObservable();
+  }
+
 
   fillMotherOtherInfo(mother: any)
   {

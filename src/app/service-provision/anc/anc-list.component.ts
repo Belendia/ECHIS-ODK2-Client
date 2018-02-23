@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { ODKService } from '../../shared/odk.service';
 import {Subscription} from 'rxjs/Subscription';
 import {AncService} from './service/anc.service';
+import {Mother} from './model/mother.model';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {MatDialog} from '@angular/material';
 @Component({
   selector: 'anc-list',
   templateUrl: './anc-list.template.html',
@@ -10,7 +13,10 @@ import {AncService} from './service/anc.service';
 })
 export class AncListComponent implements OnInit, OnDestroy{
 
-  constructor(private ancService: AncService, private router: Router, private route: ActivatedRoute,  private odkService: ODKService)  {}
+  constructor(private ancService: AncService,
+              private router: Router, private route: ActivatedRoute,
+              private odkService: ODKService,
+              private dialog: MatDialog)  {}
   ancClients:any =[];
   ancClientsSubscription: Subscription;
   ngOnInit(): void {
@@ -105,7 +111,15 @@ export class AncListComponent implements OnInit, OnDestroy{
 
     ];*/
 
-    this.ancClientsSubscription = this.ancService.getAncClients().subscribe(
+    this.ancClientsSubscription = this.route.data.subscribe((data)=> {
+      console.log('anc clients '+ JSON.stringify(data));
+      if (data && data.ancClients)
+      {
+        this.ancClients = data.ancClients.ancClients;
+      }
+    });
+
+   /* this.ancClientsSubscription = this.ancService.getAncClients().subscribe(
       (result) => {
         this.ancClients = result;
         console.log(JSON.stringify(result));
@@ -113,13 +127,13 @@ export class AncListComponent implements OnInit, OnDestroy{
       (error) => {
         console.log(error);
       }
-    );
+    );*/
 
   }
 
   goToDetail(ancClient:any)
   {
-    this.router.navigate(['../anc-detail', ancClient.householdMemberId], {relativeTo: this.route});
+    this.router.navigate(['../anc-detail', ancClient.caseId], {relativeTo: this.route});
   }
 
   onAdd()
@@ -134,4 +148,58 @@ export class AncListComponent implements OnInit, OnDestroy{
   }
 
 
+   getGestationalAge (ancClient: Mother) {
+    let lmp:any = ancClient.lmp;
+     let ga = null;
+    try {
+      if (lmp) {
+        if (typeof(lmp) === 'string')
+          lmp = new Date(lmp);
+
+        let today: any = new Date();
+        ga = Math.floor((today - lmp) / 1000 / 60 / 60 / 24 / 7);
+      }
+      if(ga!=null)
+        console.log('gestational age in weeks is ' + ga);
+    } catch (error) {
+      console.log(error);
+    }
+    return ga;
+  }
+
+   isEddPast (edd: any) {
+    try
+     {
+      let eddDate: number = Date.parse(edd);
+      let days = (eddDate - new Date().getMilliseconds()) / 1000 / 60 / 60 / 24;
+      console.log("edd from now is "+ days + " away or past ");
+      if(days < 0)
+         return true;
+      else
+        return false;
+     }
+    catch(err)
+    {
+      console.log("getDeliveryRemainingDays "+ err);
+      return null;
+    }
+  }
+
+   getClientRiskFactors(ancClient: any): string
+   {
+      let riskFactors: string = "";
+     if(ancClient && ancClient.riskFactors!=null && ancClient.riskFactors !="")
+     {
+        return ancClient.riskFactors;
+     }
+     return riskFactors;
+   }
+
+  closeCase(ancClient: any)
+  {
+    if(ancClient && !ancClient.isClosed)
+    {
+      this.odkService.editRowWithSurvey('mother', 'anc_close', ancClient.caseId);
+    }
+  }
 }
