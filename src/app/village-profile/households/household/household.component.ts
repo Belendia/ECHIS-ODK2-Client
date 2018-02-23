@@ -14,7 +14,9 @@ import { Status } from '../../../shared/status.enum';
   styleUrls: ['./household.component.css']
 })
 export class HouseholdComponent implements OnInit {
-  
+  private LOG_TAG: string = "HouseholdComponent";
+
+  @ViewChild('tab') tab: ElementRef;
   icon='edit';
   selectedTabIndex = 0;
   loading: boolean= false;
@@ -29,6 +31,7 @@ export class HouseholdComponent implements OnInit {
               private householdService: HouseholdService) { }
 
   ngOnInit() {
+    this.recoverState();
     this.householdSubscription = this.householdService.householdObservable
       .subscribe((result:{status:Status, household: Household})=>{
       this.message = "";
@@ -58,6 +61,11 @@ export class HouseholdComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    if(this.householdSubscription) this.householdSubscription.unsubscribe();
+    this.destroyState();
+  }
+
   onActionButtonClicked() {
     switch(this.selectedTabIndex) {
       case 0:
@@ -79,5 +87,29 @@ export class HouseholdComponent implements OnInit {
         this.icon="add";
         break;
     }
+    this.preserveState();
   }
+
+  preserveState() {
+    this.odkService.setSessionVariable(this.LOG_TAG, 
+      {
+        icon: this.icon,
+        selectedTabIndex: this.selectedTabIndex
+      });
+  }
+  
+  recoverState() {
+    let state = this.odkService.getSessionVariable(this.LOG_TAG);
+    if(state !== undefined && state !== null && state !== "null") {
+        let stateObject = JSON.parse(state);
+        this.icon = stateObject.icon;
+        this.selectedTabIndex = stateObject.selectedTabIndex;
+    }
+  }
+  
+  destroyState() {
+    this.odkService.setSessionVariable(this.LOG_TAG, null);
+  }
+  
 }
+

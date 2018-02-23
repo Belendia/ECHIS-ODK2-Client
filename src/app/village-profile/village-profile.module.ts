@@ -16,13 +16,16 @@ import { HouseholdsToolbarComponent } from "./households/households-toolbar/hous
 import { VillageProfileRoutingModule } from "./village-profile-routing.module";
 import { HouseholdComponent } from "./households/household/household.component";
 import { HouseholdService } from "./households/household/household.service";
+import { MembersComponent } from "./households/members/members.component";
+import { MembersService } from "./households/members/members.service";
 
 @NgModule({
     declarations:[
         HamletsComponent,
         HouseholdsComponent,
         HouseholdsToolbarComponent,
-        HouseholdComponent
+        HouseholdComponent,
+        MembersComponent
     ],
     imports: [
         CommonModule,
@@ -48,9 +51,10 @@ import { HouseholdService } from "./households/household/household.service";
         HamletsComponent,
         HouseholdsComponent,
         HouseholdComponent,
-        MatListModule,
+        MembersComponent,
+        MatListModule
     ],
-    providers: [ HamletsService, HouseholdsService, HouseholdService ],
+    providers: [ HamletsService, HouseholdsService, HouseholdService, MembersService ],
     entryComponents: [ ConfirmDialogComponent, HouseholdsToolbarComponent ]
 })
 export class VillageProfileModule{}

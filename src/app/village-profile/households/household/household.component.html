@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<mat-tab-group class="tab-group" (selectedTabChange)="tabChanged($event)" 
+<mat-tab-group [selectedIndex]='selectedTabIndex' class="tab-group" (selectedTabChange)="tabChanged($event)" 
   *ngIf="!loading && household !== null && household !== undefined">
   <mat-tab label="Address">
     <div class="tab-content">
@@ -50,7 +50,7 @@
   </mat-tab>
   <mat-tab label="Members">
     <div class="tab-content">
-      
+      <app-members [householdId]='householdId'></app-members>
       
     </div>  
   </mat-tab>
