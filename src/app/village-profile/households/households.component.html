@@ -1,5 +1,3 @@
-<br />
-<h4>Households</h4>
 <mat-card>
   <mat-select placeholder="Hamlet" [(ngModel)]="selectedHamletId" 
       name="hamlet" (selectionChange) = "onSelectChange($event)">
@@ -10,16 +8,16 @@
 </mat-card>
 
 <mat-list *ngIf="!loading && display_households.length > 0">
-  <mat-list-item *ngFor="let household of display_households">
+  <mat-list-item *ngFor="let household of display_households | filter:searchTerm:'household_number'">
     <div class="wrapper">
       <div>
-          <img class="avatar" src="{{household.photo}}" alt="{{household.house_number}}">
+          <img class="avatar" src="{{household.photo ? household.photo : photo}}" alt="{{household.house_number}}" >
       </div>
       <div class="text">
+          <strong mat-line>{{ household.head_name }}</strong>
           <span mat-line>House No: {{ household.household_number }}</span>
           <span mat-line>Phone: {{ household.phone }}</span>
-          <span mat-line>Members: {{ household.number_of_hh_member }}</span>
-          <em mat-line>Status: {{ household.current_status ? 'Active' : 'Inactive' }} </em>
+          <em mat-line>Members: {{ household.number_of_hh_member }}</em>
       </div>
     </div>
   
@@ -31,7 +29,7 @@
         <mat-icon>delete</mat-icon> Delete 
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item >
+      <button mat-menu-item (click)="onHouseholdDetail(household)">
         <mat-icon>person</mat-icon> Detail 
       </button>
     </mat-menu>     

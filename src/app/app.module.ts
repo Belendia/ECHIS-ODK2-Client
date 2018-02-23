@@ -12,7 +12,6 @@ import {ServiceProvisionModule} from './service-provision/service-provision.modu
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

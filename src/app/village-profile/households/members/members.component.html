@@ -1,0 +1,32 @@
+<mat-list *ngIf="!loading && members.length > 0">
+    <mat-list-item *ngFor="let member of members">
+        <div class="wrapper">
+        <div>
+            <img class="avatar" src="{{member.photo ? member.photo : photo}}" alt="{{member.first_name}}" >
+        </div>
+        <div class="text">
+            <strong mat-line>{{ member.first_name }} {{ member.middle_name }} {{ member.last_name }}</strong>
+            <span mat-line>Sex: {{ member.sex === 1 ? 'Male' : 'Female' }}</span>
+        </div>
+        </div>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onEdit(member)">
+                <mat-icon>edit</mat-icon> Edit 
+            </button>
+            <button mat-menu-item (click)="onDelete(member)">
+                <mat-icon>delete</mat-icon> Delete 
+            </button>
+        </mat-menu>     
+        <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+        <mat-divider></mat-divider> 
+    </mat-list-item>
+</mat-list>
+        
+<mat-card *ngIf="!loading && members.length === 0">
+    <strong>{{ message }}</strong>
+</mat-card>
+
+<mat-card *ngIf="loading">
+    <strong>Loading: please wait...</strong>
+</mat-card>

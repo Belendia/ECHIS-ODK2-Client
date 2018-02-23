@@ -12,10 +12,12 @@ import { ISubscription } from 'rxjs/Subscription';
 export class AppComponent implements OnInit {
   
   @ViewChild("toolbarContainer", {read: ViewContainerRef}) toolbarContainer: ViewContainerRef;
-  routerEventSubscription: ISubscription
+  
+  routerEventSubscription: ISubscription;
+  fullScreen:boolean = false; 
+
   constructor(private componentFactoryResolver: ComponentFactoryResolver, 
               private router: Router) {}
-
   ngOnInit() {
     this.routerEventSubscription = this.router.events.subscribe(
       (event: Event) => {
@@ -30,6 +32,15 @@ export class AppComponent implements OnInit {
               let componentFactory = this.componentFactoryResolver.resolveComponentFactory(toolbarComponent);
               this.toolbarContainer.clear();
               let componentRef = this.toolbarContainer.createComponent(componentFactory);
+               
+              if(data['title'] !== undefined) {
+                componentRef.instance.title = data['title'];
+              } 
+
+              this.fullScreen = false;
+              if(data['fullScreen'] === true) {
+                this.fullScreen = true;
+              }
           }
       }
     );

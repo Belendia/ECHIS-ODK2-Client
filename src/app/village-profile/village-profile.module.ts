@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule, MatListModule, MatButtonModule, MatMenuModule, 
          MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatGridListModule, 
-         MatSnackBarModule, MatSelectModule, MatOptionModule, MatInputModule } from '@angular/material';
+         MatSnackBarModule, MatSelectModule, MatOptionModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { FormsModule } from "@angular/forms";
 
 import { SharedModule } from "../shared/shared.module";
@@ -14,12 +14,18 @@ import { HamletsService } from "./hamlets/hamlets.service";
 import { HouseholdsService } from "./households/households.service";
 import { HouseholdsToolbarComponent } from "./households/households-toolbar/households-toolbar.component";
 import { VillageProfileRoutingModule } from "./village-profile-routing.module";
+import { HouseholdComponent } from "./households/household/household.component";
+import { HouseholdService } from "./households/household/household.service";
+import { MembersComponent } from "./households/members/members.component";
+import { MembersService } from "./households/members/members.service";
 
 @NgModule({
     declarations:[
         HamletsComponent,
         HouseholdsComponent,
-        HouseholdsToolbarComponent
+        HouseholdsToolbarComponent,
+        HouseholdComponent,
+        MembersComponent
     ],
     imports: [
         CommonModule,
@@ -36,6 +42,7 @@ import { VillageProfileRoutingModule } from "./village-profile-routing.module";
         MatSelectModule,
         MatOptionModule,
         MatInputModule,
+        MatTabsModule,
         FormsModule,
         SharedModule,
         VillageProfileRoutingModule
@@ -43,9 +50,11 @@ import { VillageProfileRoutingModule } from "./village-profile-routing.module";
     exports: [
         HamletsComponent,
         HouseholdsComponent,
-        MatListModule,
+        HouseholdComponent,
+        MembersComponent,
+        MatListModule
     ],
-    providers: [ HamletsService, HouseholdsService ],
+    providers: [ HamletsService, HouseholdsService, HouseholdService, MembersService ],
     entryComponents: [ ConfirmDialogComponent, HouseholdsToolbarComponent ]
 })
 export class VillageProfileModule{}

@@ -1,4 +1,4 @@
-import { Component, OnInit,DoCheck, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,DoCheck, OnDestroy } from '@angular/core';
 import { MatMenuTrigger, PageEvent, MatDialog, MatSnackBar} from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { Router } from '@angular/router';
@@ -34,7 +34,6 @@ export class HamletsComponent implements OnInit,DoCheck, OnDestroy {
 
   constructor(private hamletsService: HamletsService,
               private odkService: ODKService,
-              private changeDetector: ChangeDetectorRef,
               private pagerService: PagerService,
               public dialog: MatDialog,
               public snackBar: MatSnackBar,

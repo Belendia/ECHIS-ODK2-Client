@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ODKService } from '../../../shared/odk.service';
+import { HouseholdsService } from '../households.service';
+import { Status } from '../../../shared/status.enum';
 
 @Component({
   selector: 'app-households-toolbar',
@@ -13,7 +15,7 @@ export class HouseholdsToolbarComponent implements OnInit, OnDestroy {
   title = 'Households';
   private LOG_TAG: string = 'HouseholdsToolbarComponent';
 
-  constructor(private odkService: ODKService) { }
+  constructor(private odkService: ODKService, private householdService: HouseholdsService) { }
   
   ngOnInit() {
     this.recoverState();
@@ -25,12 +27,16 @@ export class HouseholdsToolbarComponent implements OnInit, OnDestroy {
 
   toggleSearch() {
     this.showSearch = !this.showSearch;
-    if(this.showSearch === false) this.searchTerm = '';
+    if(this.showSearch === false) {
+      this.searchTerm = '';
+      this.householdService.searchTermObservable.next('');
+    }
     this.preserveState();
   }
 
   onSearchChange(value) {
     this.preserveState();
+    this.householdService.searchTermObservable.next(value);
   }
 
   preserveState() {
