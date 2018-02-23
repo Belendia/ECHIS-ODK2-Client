@@ -6,13 +6,15 @@ import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.componen
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {FormatDatePipe} from './pipes/formatDate.pipe';
+import {FilterPipe} from './pipe/filter.pipe';
 
 @NgModule({
     declarations:[
         ConfirmDialogComponent,
         MessageDialogComponent,
         ToolbarComponent,
-        FormatDatePipe
+        FormatDatePipe,
+        FilterPipe
     ],
     imports: [
         CommonModule,
@@ -23,7 +25,8 @@ import {FormatDatePipe} from './pipes/formatDate.pipe';
         ConfirmDialogComponent,
         MessageDialogComponent,
         ToolbarComponent,
-        FormatDatePipe
+        FormatDatePipe,
+        FilterPipe
     ]
 })
 export class SharedModule{}
