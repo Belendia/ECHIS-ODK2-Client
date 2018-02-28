@@ -4,7 +4,7 @@ export class Member {
         public first_name: string,
         public middle_name: string,
         public last_name: string,
-        public sex: number,
+        public sex: string,
         public date_of_birth: string,
         public vital_registration_number: string,
         public tin_number: string,
