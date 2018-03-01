@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatButtonModule } from '@angular/material';
+import { MatToolbarModule, MatIconModule, MatSidenavModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { PieChartComponent } from 'angular-d3-charts/src/pieChart.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { VillageProfileModule } from './village-profile/village-profile.module';
@@ -16,7 +17,8 @@ import {SharedModule} from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import {SharedModule} from './shared/shared.module';
     SharedModule,
     AppRoutingModule,
     VillageProfileModule,
-    ServiceProvisionModule
+    ServiceProvisionModule,
+    MatCardModule
   ],
   providers: [ ODKService, PagerService ],
   bootstrap: [ AppComponent ],

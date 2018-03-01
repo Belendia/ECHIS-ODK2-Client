@@ -36,7 +36,7 @@ export class MembersService {
                   result.getData(row,"first_name"),
                   result.getData(row,"middle_name"),
                   result.getData(row, "last_name"),
-                  Number(result.getData(row,"sex")),
+                  result.getData(row,"sex"),
                   result.getData(row, "date_of_birth"),
                   result.getData(row,"vital_registration_number"),
                   result.getData(row, "tin_number"),

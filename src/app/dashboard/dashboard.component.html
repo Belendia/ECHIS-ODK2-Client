@@ -1,3 +1,15 @@
-<p>
-  dashboard works!
-</p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Number of people by sex</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <angular-d3-pie [id]="pieChart" 
+            [data]="membersBySex" 
+            *ngIf = "!loadingMembersBySex && membersBySex.length > 0" 
+            [outerRadius]="60" 
+            [width]="200" 
+            [height]="120"></angular-d3-pie>  
+        <strong *ngIf="loadingMembersBySex">Loading...</strong>
+        <strong *ngIf="!loadingMembersBySex && membersBySexMessage.length > 0">{{ membersBySexMessage }}</strong>
+    </mat-card-content>   
+</mat-card>
