@@ -5,6 +5,7 @@ import {AncService} from './service/anc.service';
 import {AncVisitModel} from './model/ancVisit.model';
 import {ODKService} from '../../shared/odk.service';
 import {DeliveryOutcomeModel} from './model/deliveryOutcome.model';
+import {Mother} from './model/mother.model';
 @Component(
   {
     selector: 'anc-detail',
@@ -20,6 +21,7 @@ export class AncDetailComponent implements OnInit, OnDestroy {
   deliveryPlan: any;
   ancVisitsSubscription: Subscription;
   deliveryOutcome: DeliveryOutcomeModel = null;
+  gestationalAge: number;
 
   constructor(private route: ActivatedRoute, private ancService: AncService, private odkService: ODKService)
   {
@@ -40,7 +42,10 @@ export class AncDetailComponent implements OnInit, OnDestroy {
           this.getDeliveryOutcome();
      });
 
-
+     this.route.queryParams.subscribe((params: Params) => {
+       this.gestationalAge = +params['ga'];
+       console.log("ga passed from query param"+ this.gestationalAge);
+     });
   }
 
   getDeliveryOutcome()
@@ -87,7 +92,7 @@ export class AncDetailComponent implements OnInit, OnDestroy {
   newVisit()
   {
     this.odkService.addRowWithSurvey('anc_visit', 'anc_visit', {anc_case_id: this.mother_case_id,
-      last_anc_visit: this.getLastAncVisit(), ga: 8  });
+      last_anc_visit: this.getLastAncVisit(), ga:  this.gestationalAge });
   }
 
   addDeliveryOutcome()
@@ -138,4 +143,6 @@ export class AncDetailComponent implements OnInit, OnDestroy {
     if(this.ancVisitsSubscription)
        this.ancVisitsSubscription.unsubscribe();
   }
+
+
 }

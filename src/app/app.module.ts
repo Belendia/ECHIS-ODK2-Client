@@ -11,6 +11,7 @@ import { PagerService } from './shared/pager.service';
 import {ServiceProvisionModule} from './service-provision/service-provision.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { ToolbarComponent } from './shared/toolbar/toolbar.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule,
+   /* MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    MatButtonModule,
+    MatButtonModule,*/
+    SharedModule,
     AppRoutingModule,
     VillageProfileModule,
     ServiceProvisionModule

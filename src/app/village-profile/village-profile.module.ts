@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatIconModule, MatListModule, MatButtonModule, MatMenuModule, 
-         MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatGridListModule, 
+import { MatIconModule, MatListModule, MatButtonModule, MatMenuModule,
+         MatPaginatorModule, MatCardModule, MatProgressSpinnerModule, MatGridListModule,
          MatSnackBarModule, MatSelectModule, MatOptionModule, MatInputModule, MatTabsModule } from '@angular/material';
 import { FormsModule } from "@angular/forms";
 
@@ -29,20 +29,7 @@ import { MembersService } from "./households/members/members.service";
     ],
     imports: [
         CommonModule,
-        BrowserAnimationsModule, 
-        MatIconModule,
-        MatListModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatPaginatorModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        MatGridListModule,
-        MatSnackBarModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatInputModule,
-        MatTabsModule,
+        BrowserAnimationsModule,
         FormsModule,
         SharedModule,
         VillageProfileRoutingModule
@@ -52,7 +39,7 @@ import { MembersService } from "./households/members/members.service";
         HouseholdsComponent,
         HouseholdComponent,
         MembersComponent,
-        MatListModule
+     //   MatListModule
     ],
     providers: [ HamletsService, HouseholdsService, HouseholdService, MembersService ],
     entryComponents: [ ConfirmDialogComponent, HouseholdsToolbarComponent ]

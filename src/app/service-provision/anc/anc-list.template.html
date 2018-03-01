@@ -2,8 +2,6 @@
   <h3 mat-subheader>ANC Clients</h3>
   <mat-list-item  *ngFor="let client of ancClients">
       <mat-icon mat-list-icon aria-setsize="48">person_outline</mat-icon>
-  <!-- <img matListAvatar src="../../../assets/images/pregnant-icon.png" height="53"
-                                                        alt="member picture" width="51"/>-->
     <h2 matLine> {{client.name}} </h2>
     <p matLine>
          <span> {{client.orgUnit}} </span>
@@ -12,6 +10,7 @@
          <span> LMP: {{client.lmp | date: 'dd/MM/yyyy'}}</span>
          <span> EDD: {{ client.edd}}</span>
     </p>
+
     <p matLine>
       <span *ngIf="isEddPast(client.edd) !=null && isEddPast(client.edd) === false"> {{getGestationalAge(client)}} weeks pregnant</span>
     </p>
@@ -22,19 +21,21 @@
       <span *ngIf="client.riskFactors && client.riskFactors !=null" style="color: red"> Risk Factors: {{ client.riskFactors }}</span>
     </p>
     <p matLine>
-      <span>{{client.isClosed? "Inactive": "Active"}}</span>
+      <span>{{getAncStatus(client)}}</span>
     </p>
 
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="goToDetail(client)">
         <mat-icon>edit</mat-icon> Detail
       </button>
-      <button mat-menu-item (click)="closeCase(client)" *ngIf="client.isClosed === false">
-        <mat-icon>delete</mat-icon> Close Anc Case
+      <button mat-menu-item (click)="closeCase(client)" *ngIf="getAncStatus(client)==='Active'">
+        <mat-icon>delete</mat-icon> Close ANC case
       </button>
-      <!--<mat-divider></mat-divider>-->
-
+      <button mat-menu-item (click)="takeFingerPrint(client)">
+        <mat-icon>fingerprint</mat-icon> Capture fingerprint
+      </button>
     </mat-menu>
+
     <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
     <mat-divider></mat-divider>
   </mat-list-item>

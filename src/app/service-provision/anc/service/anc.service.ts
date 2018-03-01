@@ -53,6 +53,8 @@ export class AncService {
                mother.edd = result.getData(rowId, "edd");
                mother.previousComplications = result.getData(rowId, "previous_complications");
                mother.riskFactors = result.getData(rowId, "general_medical_history");
+               mother.isClosed = result.getData(rowId, "isClosed");
+               mother.reason_for_closing_anc = result.getData(rowId, "reason_for_closing_anc");
                console.log("previous_complications "+ result.getData(rowId, "previous_complications"));
                this.fillMotherOtherInfo(mother);
                console.log(this.LOG_TAG + ": mother data: "+ JSON.stringify(mother));

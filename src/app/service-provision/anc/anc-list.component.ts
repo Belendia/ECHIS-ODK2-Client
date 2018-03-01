@@ -133,7 +133,8 @@ export class AncListComponent implements OnInit, OnDestroy{
 
   goToDetail(ancClient:any)
   {
-    this.router.navigate(['../anc-detail', ancClient.caseId], {relativeTo: this.route});
+    this.router.navigate(['../anc-detail', ancClient.caseId],
+      {relativeTo: this.route, queryParams:{ ga: this.getGestationalAge(ancClient)}});
   }
 
   onAdd()
@@ -197,9 +198,25 @@ export class AncListComponent implements OnInit, OnDestroy{
 
   closeCase(ancClient: any)
   {
-    if(ancClient && !ancClient.isClosed)
+    if(ancClient && (ancClient.isClosed ==='N' || ancClient.isClosed ==="N" ))
     {
       this.odkService.editRowWithSurvey('mother', 'anc_close', ancClient.caseId);
     }
+  }
+
+  getAncStatus(ancClient: any)
+  {
+    console.log("ancclient status "+ ancClient.isClosed);
+    if( ancClient.isClosed ==='Y' || ancClient.isClosed === "Y")
+         return "Inactive";
+    else
+         return "Active";
+
+  }
+
+  takeFingerPrint(ancClient: any)
+  {
+    this.odkService.editRowWithSurvey('mother', 'add_fingerprint', ancClient.caseId);
+    //this.odkService.addRowWithSurvey('capture_fingerprint', 'capture_fingerprint', null);
   }
 }

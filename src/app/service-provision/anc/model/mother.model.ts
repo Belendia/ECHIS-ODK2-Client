@@ -13,8 +13,8 @@ export class Mother {
   public edd: string;
   public isHighRisk:boolean;
   public riskFactors:string;
-  public isClosed:boolean = false;
-
+  public isClosed:string = 'N';
+  public reason_for_closing_anc: string;
   public firstPregnancy: string;
   public previousComplications: string;
   //anc visits
